@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.0" prefWidth="300.0" 
+xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controller="com.warehouse_manager.loginController">
+   <children>
+      <Text layoutX="45.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="loginField" layoutX="45.0" layoutY="65.0" prefHeight="25.0" prefWidth="210.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text layoutX="45.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PASSWORD">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Button layoutX="43.0" layoutY="242.0" mnemonicParsing="false" onAction="#signIn" prefHeight="43.0" prefWidth="210.0" text="SING IN" />
+      <PasswordField fx:id="paassField" layoutX="45.0" layoutY="139.0" prefHeight="35.0" prefWidth="210.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </PasswordField>
+   </children>
+</Pane>
