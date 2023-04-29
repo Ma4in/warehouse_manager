@@ -26,7 +26,7 @@ xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/" fx:controll
          </font>
       </Text>
       <Button layoutX="43.0" layoutY="242.0" mnemonicParsing="false" onAction="#signIn" prefHeight="43.0" prefWidth="210.0" text="SING IN" />
-      <PasswordField fx:id="paassField" layoutX="45.0" layoutY="139.0" prefHeight="35.0" prefWidth="210.0">
+      <PasswordField fx:id="passField" layoutX="45.0" layoutY="139.0" prefHeight="35.0" prefWidth="210.0">
          <font>
             <Font size="16.0" />
          </font>

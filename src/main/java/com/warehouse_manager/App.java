@@ -6,9 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
+
 
 /**
  * JavaFX App
@@ -16,7 +16,6 @@ import java.net.URL;
 public class App extends Application {
 
     private static Scene scene;
-
     static Stage stage;
 
     @Override
@@ -28,7 +27,6 @@ public class App extends Application {
         stage.getIcons().add(new Image("wha.png"));
         stage.show();
         stage.setResizable(false);
-       
     }
 
     static void changeSize(int width, int height, boolean resizable){
