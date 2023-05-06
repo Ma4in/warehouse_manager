@@ -32,7 +32,8 @@ public class mainController implements Initializable{
     @FXML TextField CountInput;
     @FXML RadioButton hardSearch;
 
-    
+    Boolean userPermithion = ConnectPSQL.adminUserType; 
+
     ObservableList<Unit> list = FXCollections.observableArrayList();
 
     @Override
@@ -55,12 +56,15 @@ public class mainController implements Initializable{
 
 
     public void deleteUnit(){
-        Unit selecedUnit = mainTable.getSelectionModel().getSelectedItem();
-        mainTable.getItems().remove(selecedUnit);
+        if (userPermithion){
+            Unit selecedUnit = mainTable.getSelectionModel().getSelectedItem();
+            mainTable.getItems().remove(selecedUnit);
+        }
     }
 
     public void addUnit(){
-        try {
+        if (userPermithion)
+        {  try {
             List<Integer> columnData = new ArrayList<>();
             for (Unit item : mainTable.getItems()) {
                 columnData.add(idCol.getCellObservableValue(item).getValue());
@@ -76,7 +80,15 @@ public class mainController implements Initializable{
 
             Integer newCount = Integer.parseInt(CountInput.getText());
             Unit newUnit = new Unit(newId, NameInput.getText(), DepartmentInput.getText(), newCount);
-    
+            
+            int [] cap = ConnectPSQL.getСapacity("L");
+            if (cap[0] - newCount < 0){
+                showAlert("Add error", "Department overfilled. Empty space : " + cap[0]);
+                return;
+            }
+            
+         
+
             mainTable.getItems().add(newUnit);
 
             clearInput();
@@ -84,7 +96,7 @@ public class mainController implements Initializable{
             showAlert("Add error", e.getMessage());
             clearInput();
         }
-       
+       }
     }
 
     public void clearTable(){
@@ -148,8 +160,6 @@ public class mainController implements Initializable{
             zapros += str + searchType;
         }
 
-        System.out.println(zapros); // Текcтовое отображение запроса
-
         mainTable.setItems(ConnectPSQL.getTable(zapros.substring(0, zapros.length()-searchType.length())));
         
     }
@@ -159,10 +169,17 @@ public class mainController implements Initializable{
     }
 
     public void saveTable() throws Exception{
-        ConnectPSQL.saveTable(mainTable.getItems());
+        if (userPermithion) ConnectPSQL.saveTable(mainTable.getItems());
     }
 
     public void exitProgram(){
         System.exit(0);
     }
+
+    public void addNewUser() throws Exception{
+        
+        if (userPermithion) App.setRoot("register");
+        
+    }
+
 }

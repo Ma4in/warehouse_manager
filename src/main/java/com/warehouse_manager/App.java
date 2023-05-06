@@ -34,6 +34,8 @@ public class App extends Application {
         stage.setMinHeight(height);
         stage.setMinWidth(width);
         stage.setResizable(resizable);
+        stage.setHeight(height);
+        stage.setWidth(width);
     }
 
     static void setRoot(String fxml) throws IOException {

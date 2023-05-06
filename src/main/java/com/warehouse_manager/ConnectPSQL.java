@@ -15,7 +15,8 @@ public class ConnectPSQL {
     static final String USER = "postgres";
     static final String PASS = "1111";
 
-    
+    public static Boolean adminUserType = false;
+
     public static ObservableList<Unit> getTable(String zapros) throws Exception{
 
         ObservableList<Unit> list = FXCollections.observableArrayList();
@@ -52,10 +53,11 @@ public class ConnectPSQL {
         while (resultSet.next()) {
             if(
                resultSet.getString("userlogin").equals(login) &&
-               resultSet.getString("userpassword").equals(password)&&
-               resultSet.getBoolean("userpermission") == true
-            
-            ) return true;
+               resultSet.getString("userpassword").equals(password)  
+            ) {
+                adminUserType = resultSet.getBoolean("userpermission");
+                return true;
+            }
         }
 
         connection.close();
@@ -77,4 +79,26 @@ public class ConnectPSQL {
             statement.execute();
         }
     }
+
+    public static void setZapros(String zapros) throws Exception{
+
+        Class.forName("org.postgresql.Driver");
+        Connection connection = DriverManager.getConnection(DB_URL,USER, PASS);
+
+        PreparedStatement statement = connection.prepareStatement(zapros);
+        statement.execute();
+    }
+
+    public static int[] getСapacity(String department) throws Exception{
+        Class.forName("org.postgresql.Driver");
+        Connection connection = DriverManager.getConnection(DB_URL,USER, PASS);
+
+        PreparedStatement statement = connection.prepareStatement(
+            String.format("select ((select capacity from departments where departmentid = '%s') - sum(unitcount)) as sum,  (select capacity from departments where departmentid = '%s') from units where unitdepartment = '%s';", department, department, department));
+        ResultSet resultSet = statement.executeQuery();
+        resultSet.next();
+
+        return new int[] {resultSet.getInt("sum"), resultSet.getInt("capacity")};
+    }
+
 }
